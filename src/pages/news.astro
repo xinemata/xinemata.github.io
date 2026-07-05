@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const news = (await getCollection('news')).sort(
+  (a, b) => b.data.year - a.data.year,
+);
+
+const sections = [
+  { heading: 'Selected Shows', items: news.filter((n) => n.data.category === 'show') },
+  { heading: 'Selected Talks', items: news.filter((n) => n.data.category === 'talk') },
+  { heading: 'Residencies', items: news.filter((n) => n.data.category === 'residency') },
+];
+---
+
+<Base title="News – Xin Xin" active="news">
+  {
+    sections.map(
+      (section) =>
+        section.items.length > 0 && (
+          <section class="news-section">
+            <h2>{section.heading}</h2>
+            <ul class="news-grid">
+              {section.items.map((item) => (
+                <li>
+                  {item.data.url ? (
+                    <a href={item.data.url}>
+                      {item.data.year}, {item.data.title}, {item.data.venue}
+                    </a>
+                  ) : (
+                    <>
+                      {item.data.year}, {item.data.title}, {item.data.venue}
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ),
+    )
+  }
+</Base>

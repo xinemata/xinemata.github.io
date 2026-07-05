@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  active?: 'works' | 'bio' | 'news' | '';
+  description?: string;
+}
+
+const {
+  title = 'Xin Xin',
+  active = '',
+  description = 'Xin Xin is an artist making socially-engaged software that explores the possibilities of reshaping language and power relations.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="/">Xin Xin</a>
+      <nav class="site-nav">
+        <a href="/works/" class:list={[{ active: active === 'works' }]}>Works</a>
+        <a href="/bio/" class:list={[{ active: active === 'bio' }]}>Bio</a>
+        <a href="/news/" class:list={[{ active: active === 'news' }]}>News</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

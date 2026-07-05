@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const works = (await getCollection('works')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Base title="Works – Xin Xin" active="works">
+  <div class="split">
+    <section>
+      <h2 class="section-label">Selected Works</h2>
+      <ul class="index-list">
+        {
+          works.map((work) => (
+            <li>
+              <a href={`/works/${work.id}/`} data-work-link={work.id}>
+                <div class="item-title">{work.data.title}</div>
+                <div class="item-meta">
+                  {work.data.label}, {work.data.year}
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+    <section class="image-stack">
+      {
+        works.map((work) => (
+          <a href={`/works/${work.id}/`} data-work-image={work.id} id={`image-${work.id}`}>
+            <figure>
+              <img
+                src={work.data.heroImage}
+                alt={work.data.heroImageAlt || work.data.title}
+                loading="lazy"
+              />
+            </figure>
+          </a>
+        ))
+      }
+    </section>
+  </div>
+</Base>
+
+<script>
+  // Hover a title -> scroll to its image. Hover an image -> its title lights up.
+  const links = document.querySelectorAll<HTMLElement>('[data-work-link]');
+  const images = document.querySelectorAll<HTMLElement>('[data-work-image]');
+
+  links.forEach((link) => {
+    link.addEventListener('mouseenter', () => {
+      const image = document.getElementById(`image-${link.dataset.workLink}`);
+      image?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+
+  images.forEach((image) => {
+    const link = document.querySelector<HTMLElement>(
+      `[data-work-link="${image.dataset.workImage}"]`,
+    );
+    image.addEventListener('mouseenter', () => link?.classList.add('is-active'));
+    image.addEventListener('mouseleave', () => link?.classList.remove('is-active'));
+  });
+</script>

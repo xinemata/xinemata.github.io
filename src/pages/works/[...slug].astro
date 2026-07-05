@@ -1,0 +1,95 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works');
+  return works.map((work) => ({
+    params: { slug: work.id },
+    props: { work },
+  }));
+}
+
+const { work } = Astro.props;
+const { Content } = await render(work);
+---
+
+<Base title={`${work.data.title} – Xin Xin`} active="works">
+  <article class="work-detail">
+    <h1 class="work-title">{work.data.title}</h1>
+    <p class="work-label">{work.data.label}, {work.data.year}</p>
+
+    {
+      work.data.awards.length > 0 && (
+        <div class="work-awards">
+          {work.data.awards.map((award) =>
+            award.image ? (
+              <img src={award.image} alt={award.name} title={award.name} />
+            ) : (
+              <span class="item-meta">{award.name}</span>
+            ),
+          )}
+        </div>
+      )
+    }
+
+    <figure class="work-hero">
+      {
+        work.data.heroVideo ? (
+          <iframe
+            src={work.data.heroVideo}
+            title={work.data.title}
+            style="aspect-ratio: 16 / 9; width: 100%; border: 0;"
+            allowfullscreen
+          />
+        ) : (
+          <img
+            src={work.data.heroImage}
+            alt={work.data.heroImageAlt || work.data.title}
+          />
+        )
+      }
+    </figure>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {
+      work.data.press.length > 0 && (
+        <section>
+          <h2 class="section-label">Writings/Press</h2>
+          <ul class="press-list">
+            {work.data.press.map((item) => (
+              <li>
+                <a href={item.url}>{item.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      work.data.gallery.length > 0 && (
+        <section class="gallery">
+          {work.data.gallery.map((item) => (
+            <figure>
+              <img src={item.image} alt={item.caption || work.data.title} loading="lazy" />
+              {item.caption && <figcaption>{item.caption}</figcaption>}
+            </figure>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      work.data.credits && (
+        <section>
+          <h2 class="section-label">Credits</h2>
+          <p class="credits">{work.data.credits}</p>
+        </section>
+      )
+    }
+  </article>
+</Base>
