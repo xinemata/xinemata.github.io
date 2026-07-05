@@ -11,21 +11,8 @@ links:
     url: '#'
 ---
 
-Xin Xin is an artist currently making [socially-engaged software](https://example.com)
-that explores the possibilities of reshaping language and power relations.
-Through mediating, subverting, and innovating modes of social interaction in
-the digital space, Xin invites participants to relate to one another and
-experience togetherness in new and unfamiliar ways.
+[Xin Xin](https://xin-xin.info/) is a Taiwanese-American cultural producer exploring community-driven technology in creative and educational spaces. As Creator of [TogetherNet](https://together-support.github.io/) and Co-Editor of the [Critical Coding Cookbook](https://criticalcode.recipes/), Xin advocates for liberatory software culture through the reclamation and subversion of power dynamics embedded within digital systems.
 
-As an artist, their work has been exhibited internationally at Ars Electronica,
-Eyebeam, DIS, Kunstverein Wolfsburg, and the Gene Siskel Film Center. They were
-an [Eyebeam Rapid Response for a Better Digital Future Fellow](https://example.com)
-and a [Sundance Art of Practice Fellow](https://example.com). As an organizer,
-Xin co-founded [voidLab](https://example.com), a LA-based intersectional
-feminist collective dedicated to women, trans, and queer folks. They were the
-Director for [Processing Community Day 2019](https://example.com) and they
-serve on the [Processing Foundation Board](https://example.com).
+Born in Taipei and raised in Massachusetts, Xin brings a multicultural perspective to questions of technology and sovereignty. An [Eyebeam Rapid Response for a Better Digital Future Fellow](https://eyebeam.org/artists/xin-xin/) and [Sundance Art of Practice Fellow](https://www.sundance.org/blogs/five-lessons-from-the-art-of-practice-the-sundance-interdisciplinary-program/), their genre-bending practice weaves together art, education, organizing, and technological experimentation—interrogating who controls technology, who benefits from it, and the power of collectives in building a more equitable digital future.
 
-Born in Taiwan and based in NYC, Xin received their M.F.A from UCLA Design
-Media Arts and currently teaches at Parsons School of Design as an
-[Assistant Professor of Interaction and Media Design](https://example.com).
+Xin works with [Processing Foundation](https://processingfoundation.org/) to support open-source software for artists and serves as an [Associate Professor of Interaction and Media Design](https://www.newschool.edu/parsons/faculty/xin-xin/) at the New School, where they work with emerging practitioners to develop critical and socially-engaged approaches to design and technology.
