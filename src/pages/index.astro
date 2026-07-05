@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const news = (await getCollection('news', ({ data }) => data.current)).sort(
+  (a, b) => b.data.year - a.data.year,
+);
+
+const works = (await getCollection('works', ({ data }) => data.featured)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Base title="Xin Xin">
+  <div class="split">
+    <section>
+      <h2 class="section-label">News or current</h2>
+      <ul class="index-list">
+        {
+          news.map((item) => (
+            <li>
+              {item.data.url ? (
+                <a href={item.data.url}>
+                  <div class="item-title">
+                    {item.data.venue} – {item.data.title}
+                  </div>
+                  {item.data.date && <div class="item-meta">{item.data.date}</div>}
+                </a>
+              ) : (
+                <>
+                  <div class="item-title">
+                    {item.data.venue} – {item.data.title}
+                  </div>
+                  {item.data.date && <div class="item-meta">{item.data.date}</div>}
+                </>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+    <section class="image-stack">
+      {
+        works.map((work) => (
+          <a href={`/works/${work.id}/`}>
+            <figure>
+              <img
+                src={work.data.heroImage}
+                alt={work.data.heroImageAlt || work.data.title}
+                loading="lazy"
+              />
+            </figure>
+          </a>
+        ))
+      }
+    </section>
+  </div>
+</Base>

@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import { Content, frontmatter } from '../content/bio.md';
+---
+
+<Base title="Bio – Xin Xin" active="bio">
+  <div class="bio">
+    <section>
+      <p class="bio-email">
+        <a href={`mailto:${frontmatter.email}`}>{frontmatter.email}</a>
+      </p>
+      <div class="prose">
+        <Content />
+      </div>
+      <div class="bio-links">
+        <h2>Links</h2>
+        <ul>
+          {
+            frontmatter.links.map((link: { title: string; url: string }) => (
+              <li>
+                <a href={link.url}>{link.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+    <figure>
+      <img src={frontmatter.headshot} alt={frontmatter.headshotAlt} />
+    </figure>
+  </div>
+</Base>

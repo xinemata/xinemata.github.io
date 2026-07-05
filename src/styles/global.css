@@ -1,0 +1,322 @@
+/* ---------------------------------------------------------------
+   Global styles — clean, minimal, bold sans-serif per design mockup
+   --------------------------------------------------------------- */
+
+:root {
+  --color-text: #000;
+  --color-muted: #b3b3b3;
+  --color-rule: #000;
+  --color-bg: #fff;
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --site-padding: 2.5rem;
+  --header-height: 5rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---- Header ---- */
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--site-padding) var(--site-padding) 1.5rem;
+}
+
+.wordmark {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.site-nav a {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-muted);
+  transition: color 0.15s ease;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  color: var(--color-text);
+}
+
+/* ---- Main ---- */
+
+main {
+  padding: 0 var(--site-padding) var(--site-padding);
+}
+
+.section-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* ---- Two-column layout (home, works) ---- */
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(16rem, 1fr) 2.5fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ---- Index list (home news, works list) ---- */
+
+.index-list {
+  list-style: none;
+}
+
+.index-list li {
+  margin-bottom: 1.1rem;
+}
+
+.index-list .item-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.index-list .item-meta {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.index-list a:hover .item-title,
+.index-list a.is-active .item-title {
+  text-decoration: underline;
+}
+
+/* ---- Image stack (home, works) ---- */
+
+.image-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.image-stack figure img {
+  width: 100%;
+}
+
+.image-stack figcaption {
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+/* ---- Work detail ---- */
+
+.work-detail {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.work-detail .work-title {
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+}
+
+.work-detail .work-label {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.work-detail .work-awards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.work-detail .work-awards img {
+  height: 3.5rem;
+  width: auto;
+}
+
+.work-detail .work-hero {
+  margin-bottom: 2rem;
+}
+
+.work-detail .prose {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.work-detail .prose p {
+  margin-bottom: 1rem;
+}
+
+.work-detail .prose a {
+  text-decoration: underline;
+}
+
+.work-detail section {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-rule);
+}
+
+.work-detail .press-list {
+  list-style: disc;
+  padding-left: 1.25rem;
+  font-weight: 400;
+}
+
+.work-detail .press-list a {
+  text-decoration: underline;
+}
+
+.work-detail .gallery figure {
+  margin-bottom: 2rem;
+}
+
+.work-detail .gallery figcaption {
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-top: 0.5rem;
+}
+
+.work-detail .credits {
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ---- Bio ---- */
+
+.bio {
+  display: grid;
+  grid-template-columns: minmax(20rem, 38rem) minmax(14rem, 24rem);
+  gap: 4rem;
+  align-items: start;
+}
+
+.bio .bio-email {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+
+.bio .prose {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.bio .prose p {
+  margin-bottom: 1.25rem;
+}
+
+.bio .prose a {
+  text-decoration: underline;
+}
+
+.bio .bio-links {
+  margin-top: 3rem;
+}
+
+.bio .bio-links h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.bio .bio-links ul {
+  list-style: none;
+}
+
+.bio .bio-links li::before {
+  content: '- ';
+}
+
+.bio .bio-links a:hover {
+  text-decoration: underline;
+}
+
+/* ---- News ---- */
+
+.news-section {
+  margin-bottom: 3.5rem;
+}
+
+.news-section h2 {
+  font-size: 1.8rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 3rem;
+  list-style: none;
+}
+
+.news-grid li {
+  font-size: 0.9rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 900px) {
+  :root {
+    --site-padding: 1.25rem;
+  }
+
+  .site-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .split,
+  .bio {
+    grid-template-columns: 1fr;
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wordmark,
+  .site-nav a {
+    font-size: 1.5rem;
+  }
+}
