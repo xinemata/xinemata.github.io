@@ -2,9 +2,21 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 
-const news = (await getCollection('news', ({ data }) => data.current)).sort(
-  (a, b) => b.data.year - a.data.year,
-);
+// Show events within six months of the build date, either side.
+// An event counts as "in the window" if its date range overlaps it.
+const now = new Date();
+const windowStart = new Date(now);
+windowStart.setMonth(windowStart.getMonth() - 6);
+const windowEnd = new Date(now);
+windowEnd.setMonth(windowEnd.getMonth() + 6);
+
+const news = (
+  await getCollection('news', ({ data }) => {
+    if (!data.startDate) return false;
+    const end = data.endDate ?? data.startDate;
+    return end >= windowStart && data.startDate <= windowEnd;
+  })
+).sort((a, b) => b.data.startDate!.valueOf() - a.data.startDate!.valueOf());
 
 const works = (await getCollection('works', ({ data }) => data.featured)).sort(
   (a, b) => a.data.order - b.data.order,

@@ -36,7 +36,10 @@ One markdown file per item, frontmatter only:
 - `category`: `show`, `talk`, or `residency` — controls which section of the
   News page it appears in
 - `year`, `title`, `venue`, and optional display `date` and `url`
-- `current: true` also shows the item in the homepage news column
+- `startDate` (and `endDate` for ranged events), in `YYYY-MM-DD` format —
+  items whose dates fall within six months of the build date (past or future)
+  automatically appear in the homepage news column. The site rebuilds weekly
+  so the window stays current.
 
 ### Bio (`src/content/bio.md`)
 

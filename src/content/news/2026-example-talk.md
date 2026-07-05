@@ -4,5 +4,5 @@ venue: Example University
 category: talk
 year: 2026
 date: Apr 20, 2026
-current: true
+startDate: 2026-04-20
 ---

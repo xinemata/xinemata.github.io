@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Weekly rebuild so the homepage's six-month news window stays current
+  schedule:
+    - cron: '0 6 * * 1'
   workflow_dispatch:
 
 permissions:

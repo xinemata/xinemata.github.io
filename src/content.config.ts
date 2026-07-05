@@ -58,10 +58,15 @@ const news = defineCollection({
     year: z.number(),
     /** Display date, e.g. "Mar 14 – Jun 2, 2026" */
     date: z.string().optional(),
+    /**
+     * Machine-readable event date (YYYY-MM-DD). Items whose date falls
+     * within six months of the build date appear on the homepage.
+     */
+    startDate: z.coerce.date().optional(),
+    /** End date for ranged events (exhibitions, residencies) */
+    endDate: z.coerce.date().optional(),
     /** Optional external link */
     url: z.string().optional(),
-    /** Show in the "News or current" column on the homepage */
-    current: z.boolean().default(false),
   }),
 });
 
