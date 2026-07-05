@@ -54,7 +54,7 @@ const news = defineCollection({
     title: z.string(),
     /** Venue or place, e.g. "Ars Electronica, Linz" */
     venue: z.string(),
-    category: z.enum(['show', 'talk', 'residency']),
+    category: z.enum(['show', 'talk', 'workshop', 'residency']),
     year: z.number(),
     /** Display date, e.g. "Mar 14 – Jun 2, 2026" */
     date: z.string().optional(),

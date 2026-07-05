@@ -3,12 +3,15 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 
 const news = (await getCollection('news')).sort(
-  (a, b) => b.data.year - a.data.year,
+  (a, b) =>
+    b.data.year - a.data.year ||
+    (b.data.startDate?.valueOf() ?? 0) - (a.data.startDate?.valueOf() ?? 0),
 );
 
 const sections = [
   { heading: 'Selected Shows', items: news.filter((n) => n.data.category === 'show') },
   { heading: 'Selected Talks', items: news.filter((n) => n.data.category === 'talk') },
+  { heading: 'Selected Workshops', items: news.filter((n) => n.data.category === 'workshop') },
   { heading: 'Residencies', items: news.filter((n) => n.data.category === 'residency') },
 ];
 ---
