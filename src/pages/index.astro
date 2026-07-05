@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import { latestWayback } from '../lib/wayback';
 
 // Show events within six months of the build date, either side.
 // An event counts as "in the window" if its date range overlaps it.
@@ -10,13 +11,20 @@ windowStart.setMonth(windowStart.getMonth() - 6);
 const windowEnd = new Date(now);
 windowEnd.setMonth(windowEnd.getMonth() + 6);
 
-const news = (
-  await getCollection('news', ({ data }) => {
-    if (!data.startDate) return false;
-    const end = data.endDate ?? data.startDate;
-    return end >= windowStart && data.startDate <= windowEnd;
-  })
-).sort((a, b) => b.data.startDate!.valueOf() - a.data.startDate!.valueOf());
+const news = await Promise.all(
+  (
+    await getCollection('news', ({ data }) => {
+      if (!data.startDate) return false;
+      const end = data.endDate ?? data.startDate;
+      return end >= windowStart && data.startDate <= windowEnd;
+    })
+  )
+    .sort((a, b) => b.data.startDate!.valueOf() - a.data.startDate!.valueOf())
+    .map(async (item) => ({
+      ...item,
+      href: item.data.url ? await latestWayback(item.data.url) : undefined,
+    })),
+);
 
 const works = (await getCollection('works', ({ data }) => data.featured)).sort(
   (a, b) => a.data.order - b.data.order,
@@ -31,8 +39,8 @@ const works = (await getCollection('works', ({ data }) => data.featured)).sort(
         {
           news.map((item) => (
             <li>
-              {item.data.url ? (
-                <a href={item.data.url}>
+              {item.href ? (
+                <a href={item.href}>
                   <div class="item-title">
                     {item.data.venue} – {item.data.title}
                   </div>

@@ -1,11 +1,19 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import { latestWayback } from '../lib/wayback';
 
-const news = (await getCollection('news')).sort(
-  (a, b) =>
-    b.data.year - a.data.year ||
-    (b.data.startDate?.valueOf() ?? 0) - (a.data.startDate?.valueOf() ?? 0),
+const news = await Promise.all(
+  (await getCollection('news'))
+    .sort(
+      (a, b) =>
+        b.data.year - a.data.year ||
+        (b.data.startDate?.valueOf() ?? 0) - (a.data.startDate?.valueOf() ?? 0),
+    )
+    .map(async (item) => ({
+      ...item,
+      href: item.data.url ? await latestWayback(item.data.url) : undefined,
+    })),
 );
 
 const sections = [
@@ -26,8 +34,8 @@ const sections = [
             <ul class="news-grid">
               {section.items.map((item) => (
                 <li>
-                  {item.data.url ? (
-                    <a href={item.data.url}>
+                  {item.href ? (
+                    <a href={item.href}>
                       {item.data.year}, {item.data.title}, {item.data.venue}
                     </a>
                   ) : (
